@@ -13,8 +13,10 @@ def kill_switch_execution(driver) :
 
     click_on(driver,VpnSettingsPage.internet_kill_switch_button)
 
-
     turn_on_kill_switch(driver)
+
+    click_on(driver,HomePage.home_page_icon)
+
 
 
 

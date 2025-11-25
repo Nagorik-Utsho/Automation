@@ -60,7 +60,7 @@ def turn_on_kill_switch(driver):
         click_on(driver,AndroidPages.turn_on_vpn_connection)
 
         # NEW: Navigate back to app (press back 2-3 times to exit settings fully)
-        for _ in range(3):
+        for _ in range(4):
             driver.back()
             time.sleep(1)  # Brief pause between backs to let transitions settle
 
