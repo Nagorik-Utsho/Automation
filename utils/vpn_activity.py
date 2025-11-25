@@ -48,10 +48,7 @@ def server_switch(driver):
 
 def turn_on_kill_switch(driver):
     try:
-        #Settings menu
-        vpn_settings_menu(driver)
-        #VPN settings
-        vpn_settings_options(driver)
+
 
         print("Now in the wait and click block")
 
@@ -60,6 +57,7 @@ def turn_on_kill_switch(driver):
         click_on(driver,AndroidPages.settings_icon)
         click_on(driver,AndroidPages.always_on_vpn_button)
         click_on(driver,AndroidPages.block_connection_button)
+        click_on(driver,AndroidPages.turn_on_vpn_connection)
 
         # NEW: Navigate back to app (press back 2-3 times to exit settings fully)
         for _ in range(3):
@@ -82,17 +80,14 @@ def turn_on_split_tunneling(driver):
 
 def turn_off_kill_switch(driver):
     try:
-        #Settings menu
-        vpn_settings_menu(driver)
-        #VPN settings
-        vpn_settings_options(driver)
+
         click_on(driver, VpnSettingsPage.internet_kill_switch_button)
         click_on(driver, VpnSettingsPage.open_settings_button)
         click_on(driver, AndroidPages.settings_icon)
         click_on(driver, AndroidPages.always_on_vpn_button)
         click_on(driver, AndroidPages.block_connection_button)
         # NEW: Navigate back to app (press back 2-3 times to exit settings fully)
-        for _ in range(3):
+        for _ in range(6):
             driver.back()
             time.sleep(1)  # Brief pause between backs to let transitions settle
 
@@ -104,3 +99,20 @@ def turn_off_kill_switch(driver):
         print("Failed to turn of the kill switch",{e})
         return {"status": "Failed", "message": "Kill switch turning off  failed"}
 
+
+def logout(driver):
+
+    print("Now in log out Function")
+    #Click on the settings menu
+    click_on(driver,HomePage.settings_page_icon)
+    #click on the profile
+    click_on(driver,SettingPage.profile_menu)
+    #click on logout button
+    click_on(driver,ProfilePage.logout_button)
+    #click on 2nd logout button
+    click_on(driver,ProfilePage.logout_2nd_button)
+
+
+def onboarding(driver) :
+    print("Now in onboarding function")
+    click_on(driver,OnBoarding.onboard_login_button)

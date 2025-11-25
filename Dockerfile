@@ -27,7 +27,7 @@ CMD ["sh", "-c", "appium & sleep 10 && pytest /app/tests -v"]
 FROM budtmo/docker-android-x86-8.1
 
 # Set environment variables for Python and Appium
-ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONDONTWRITEBYTECODE=13
 ENV PYTHONUNBUFFERED=1
 ENV APPIUM=true
 ENV APPIUM_HOST="127.0.0.1"

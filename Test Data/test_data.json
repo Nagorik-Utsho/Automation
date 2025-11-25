@@ -1,0 +1,12 @@
+{
+  "manual_signin": [
+
+          {"email": "farnas@nagorik.tech", "password": "112233aa", "expected": true, "tc_id": "Signin_page_01"}
+
+  ],
+
+  "valid_activation_code": [{"code":"0840-OL26-ZUOP-24CF","expected": true ," tc_id": "Signin_page_02"}]
+
+
+
+}
