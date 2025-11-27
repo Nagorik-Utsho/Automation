@@ -1,14 +1,28 @@
 from .locators import *
-from .navigation import *
 #from .necessary_generic_utils import retry
 from .helpers import *
+from .necessary_generic_utils import *
 from .necessary_popups import close_disconnection_report_popup
 
 
 
+#Server list page
+def server_list(driver):
+    """Go to the Server list to check all the servers"""
+    print ("Now in the server list")
 
+    try:
+        wait = WebDriverWait(driver, 120)
+        server = wait.until(
+            EC.presence_of_element_located((By.XPATH, '//android.view.View[contains(@content-desc, "Auto")]'))
+        )
+        server.click()
+        time.sleep(2)
+        return {"status": "SUCCESS", "message": "Server list opened successfully"}
+    except Exception as e:
+        return {"status": "FAILED", "message": f"Server list not found: {e}"}
 
-
+#Connection function
 def connect_server(driver):
     """Connect to VPN server"""
     try:
@@ -20,6 +34,8 @@ def connect_server(driver):
         print("Failed to connect with the server")
         return {"status": "FAILED", "message": f"Failed to connect to server: {e}"}
 
+
+#Disconnection function
 #@retry(max_attempts=3, delay=2)
 def disconnect_server(driver):
     """Disconnect the VPN server"""
@@ -33,6 +49,7 @@ def disconnect_server(driver):
 
 
 
+#Server switching function
 #@retry()
 def server_switch(driver):
     """Switch the VPN server"""
@@ -45,7 +62,6 @@ def server_switch(driver):
 
 
 ''' Kill switch turn on '''
-
 def turn_on_kill_switch(driver):
     try:
 
@@ -71,13 +87,15 @@ def turn_on_kill_switch(driver):
         print(e)
         return {"status": "FAILED", "message": "Failed to turn on the kill switch"}
 
-'''Go back to Home screen after turning on the Kill switch'''
 
+
+'''Go back to Home screen after turning on the Kill switch'''
 def turn_on_split_tunneling(driver):
     print("Turning on the Split tunneling")
     click_on(driver,VpnSettingsPage.split_tunneling)
 
 
+#Kill switch turn off function
 def turn_off_kill_switch(driver):
     try:
 
@@ -100,6 +118,8 @@ def turn_off_kill_switch(driver):
         return {"status": "Failed", "message": "Kill switch turning off  failed"}
 
 
+
+#Log out function
 def logout(driver):
 
     print("Now in log out Function")
@@ -113,6 +133,50 @@ def logout(driver):
     click_on(driver,ProfilePage.logout_2nd_button)
 
 
-def onboarding(driver) :
-    print("Now in onboarding function")
-    click_on(driver,OnBoarding.onboard_login_button)
+
+
+
+
+
+countries = set()
+servers = set()
+
+#collect countries and servers name
+def collect_countries(driver) :
+    global countries, servers
+
+    result=scroll_and_collect_countries(driver)
+    print(countries)
+
+    #Put the countries in the set
+    for item in result['elements']:
+        if '-' in item :
+            servers.add(item)
+        else :
+            countries.add(item)
+
+    countries.remove("Brazil")
+    servers.add("Brazil")
+    print(f"Collected countries name :{countries}")
+
+    return countries
+
+
+def collect_servers(driver , countries) :
+    global servers
+
+    for country in countries :
+     print(f"Trying to click : {country}")
+     scroll_and_click_country(driver, country)
+     all_servers =scroll_and_collect_all_servers(driver)
+
+     #Adding the servers name in the set
+     for server in all_servers['elements'] :
+         servers.add(server)
+
+
+     print(servers)
+     print(f'Total number of server :{len(servers)} ')
+
+    return servers
+

@@ -1,50 +1,30 @@
-from WireGuard.WireGuard_Protocol_testing import *
-from utils.necessary_adb_commands import *
-from utils.necessary_generic_utils import *
-from utils.server_status import *
-from utils.vpn_activity import *
+import time
+
 from utils.driver_setup import *
+from utils.report_generator import *
+from utils.server_status import server_status_check
+from utils.servers_countries_name_collection import process_server
+from utils.vpn_activity import *
 
+countries=set()
+servers =set()
+def collecting_servers_name(driver):
+    global countries, servers
 
-
-
-def servers_status_checking_execution_steps(driver,server,countries,protocol_name):
-    
-
-    #1.Open the server list
     server_list(driver)
+    time.sleep(3)
+    countries=collect_countries(driver)
+    servers=collect_servers(driver,countries)
 
-    #2.Open the Drop_downs
-    print(" Countries name ")
-
-    for country in countries:
-            print(f"🔍 Looking for {country}...")
-            if not scroll_and_click_in_scrollview(driver, country):
-                print(f"❌ Country '{country}' not found in list.")
-                return
-
-    #3.Select server
-    print(f"🔎 Searching for target server: {server}...")
-    if not scroll_and_click_in_scrollview(driver, server):
-        print(f"❌ Target server '{server}' not found, skipping connection.")
-        return
-
-    #4.Click to connect the server
-    connect_server(driver)
-    #5.Check for the server optimization
-    server_status_check(driver)
-    #5.IP validation
-    validate_ip(driver)
-    #6.Reopen enova vpn
-    open_enova(driver)
-    #6.Disconnect server
-    disconnect_server(driver)
-    #7.close the disconnection popup
-    close_disconnection_report_popup(driver)
+    save_to_csv(countries, servers, "collected_countries_servers.csv")
 
 
-def server_status_checking_executing(driver,servers,countries,protocol_name):
 
-    #Checking the servers
-     for server in servers :
-         servers_status_checking_execution_steps(driver,server,countries,protocol_name)
+
+
+def main():
+    driver=setup_driver()
+    collecting_servers_name(driver)
+
+if __name__ == "__main__":
+    main()

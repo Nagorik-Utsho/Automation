@@ -1,8 +1,12 @@
 import csv
 from datetime import datetime
 import os
+import pandas as pd
 
 
+
+
+#CSV report generator
 def generate_csv_report(report, vpn_name='', protocol='', test_name=''):
     """
     Generates or appends to a CSV automation report.
@@ -55,10 +59,7 @@ def generate_csv_report(report, vpn_name='', protocol='', test_name=''):
     print(f"✅ Report generated/updated: {filename}")
 
 
-
-
-import csv
-
+#Save information to csv
 def save_to_csv(countries, servers, filename="countries_servers.csv"):
     """
     Save countries and servers to a CSV file with two columns:
@@ -88,8 +89,8 @@ def save_to_csv(countries, servers, filename="countries_servers.csv"):
 
     print(f"✅ CSV saved successfully as '{filename}'")
 
-import pandas as pd
 
+#Read information from the csv
 def load_countries_and_servers(csv_path):
     # Read CSV
     df = pd.read_csv(csv_path)

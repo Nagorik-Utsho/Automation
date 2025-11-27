@@ -1,5 +1,7 @@
 from .necessary_packages import *
 
+
+# watch YouTube videos
 def watch_youtube(driver):
     """Watch a YouTube video while keeping VPN connection alive"""
     try:
@@ -38,6 +40,7 @@ def watch_youtube(driver):
         return {"status": "FAILED", "message": str(e)}
 
 
+#Third party application for Ip collection
 def get_ip_from_app(driver):
     """Fetch public IP from a third-party app"""
     app_package = "cz.webprovider.whatismyipaddress"

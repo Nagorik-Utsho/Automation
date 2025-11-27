@@ -1,5 +1,5 @@
 import time
-from utils.necessary_generic_utils import server_list, scroll_and_click_in_scrollview
+from utils.necessary_generic_utils import *
 from utils.server_status import server_status_check
 from utils.vpn_activity import connect_server, disconnect_server
 from utils.report_generator import generate_csv_report
