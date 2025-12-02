@@ -50,18 +50,3 @@ def successful_server_switch_message(driver):
     except Exception as e:
         print(f"⚠️ Failed to close server switch popup: {e}")
         return {"status": "FAILED", "message": f"Failed to close server switch popup: {e}"}
-
-def close_connection_report_popup(driver,value):
-    print(value)
-    wait=WebDriverWait(driver,5)
-    try:
-
-        get_popup = wait.until(EC.presence_of_element_located((
-            By.XPATH, '//android.widget.ImageView[1]'
-        )))
-        get_popup.click()
-        #print("✅ Popup closed successfully.")
-    except Exception as e:
-        print("⚠️ Failed to close popup")
-
-    return

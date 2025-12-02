@@ -1,15 +1,12 @@
 from .locators import *
-#from .necessary_generic_utils import retry
 from .helpers import *
-from .necessary_generic_utils import *
-from .necessary_popups import close_disconnection_report_popup
-
+from .scroll_utils import *
 
 
 #Server list page
 def server_list(driver):
     """Go to the Server list to check all the servers"""
-    print ("Now in the server list")
+    #print ("Now in the server list")
 
     try:
         wait = WebDriverWait(driver, 120)
@@ -26,9 +23,9 @@ def server_list(driver):
 def connect_server(driver):
     """Connect to VPN server"""
     try:
-        print("Connect with the  server ")
-        click_on(driver,HomePage.connecting_button)
 
+        click_on(driver,HomePage.connecting_button)
+        print("Connected with the server ")
         return {"status": "SUCCESS", "message": "Server connected successfully"}
     except Exception as e:
         print("Failed to connect with the server")
@@ -40,7 +37,7 @@ def connect_server(driver):
 def disconnect_server(driver):
     """Disconnect the VPN server"""
     try:
-        print("Trying to Disconnect the vpn")
+        #print("Trying to Disconnect the vpn")
         click_on(driver,HomePage.disconnecting_button)
         click_on(driver,HomePage.disconnect_popup)
         return {"status": "SUCCESS", "message": "Server disconnected successfully"}
@@ -134,6 +131,14 @@ def logout(driver):
 
 
 
+def close_connection_report_popup(driver) :
+    try:
+        click_on(driver,HomePage.close_report_popUp_button)
+        print("Successfully closed the pop up message")
+    except Exception as e :
+        print("Failed to close the pop or Connection report pop up does not exist for this server ")
+
+
 
 
 
@@ -180,3 +185,27 @@ def collect_servers(driver , countries) :
 
     return servers
 
+
+def detect_country_for_server(server,country_list) :
+    """
+        Determine which country a server belongs to.
+        Returns the matched country or None.
+        """
+    server = server.strip()
+    for country in country_list:
+        if server.lower().startswith(country.lower()):
+            return country
+    return None
+
+
+
+#Select any server
+def select_server(driver,server ,country):
+    #go to server list
+    server_list(driver)
+
+    if country:
+        scroll_and_click_country(driver, country)
+        scroll_and_click_server(driver, server)
+    else:
+        scroll_and_click_server(driver, server)

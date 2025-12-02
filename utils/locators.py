@@ -47,6 +47,12 @@ class HomePage:
     support_page_icon=(By.XPATH,'//android.widget.Button[@content-desc="Support\nTab 3 of 4"]/android.widget.ImageView[2]')
     settings_page_icon = (By.XPATH, '//android.widget.Button[@content-desc="Settings\nTab 4 of 4"]')
 
+    """Connection Report Pop Up"""
+
+    close_report_popUp_button=(By.XPATH,'//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View[1]/android.view.View/android.view.View/android.view.View[2]/android.widget.ImageView[1]')
+
+
+
 
 
 

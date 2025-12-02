@@ -1,5 +1,8 @@
-from utils.necessary_generic_utils import *
+import time
+
 from utils.report_generator import *
+from utils.scroll_utils import *
+from utils.thrid_party_apps import get_ip_from_app
 from utils.vpn_activity import connect_server, server_list
 
 countries = set()
@@ -77,3 +80,56 @@ def process_server(driver, server, countries):
     country = find_server_country(server, countries)
     navigate_to_server(driver, server, country)
     connect_server(driver)
+
+
+
+
+
+
+def match_ip(driver,server_name,expected_ip) :
+
+    result=get_ip_from_app(driver)
+
+    actual_ip=result.get("ip")
+    print(f"Captured IP from the APP : {actual_ip}")
+    if expected_ip == actual_ip :
+
+        print(f"✔️ IP matched for {server_name} " )
+        return {"status": "SUCCESS", "message": " ✔️ IP matched  "}
+
+    else :
+        print(f"❌ IP not matched for {server_name}")
+        return {" status": "FAILED", "message": " ❌ IP not matched"}
+
+
+
+
+
+
+#From the home page after connection collects the server name , ip and other information
+def homepage_info(driver):
+    wait = WebDriverWait(driver, 5)
+    server_name = ''
+    ip_address = ''
+    try:
+        get_serverinfo = wait.until(EC.presence_of_all_elements_located(
+            (By.XPATH, f'//android.view.View[contains(@content-desc,"Connected")]')
+        ))
+
+        for elem in get_serverinfo:
+            content_desc = elem.get_attribute("content-desc")
+            if content_desc:
+                lines = content_desc.split("\n")
+                if len(lines) >= 7:
+                    server_name = lines[1]
+                    ip_address = lines[2]
+                    downloaded = lines[4]
+                    uploaded = lines[6]
+        return {"Server_name": server_name, "ip_address": ip_address}
+    except Exception as e:
+        print("Failed to gather information from the home page")
+
+    return ip_address
+
+
+
