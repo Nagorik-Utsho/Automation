@@ -1,3 +1,4 @@
+from utils.driver_setup import setup_driver
 from utils.helpers import click_on
 from utils.locators import HomePage, SettingPage, VpnSettingsPage
 from utils.necessary_adb_commands import is_internet_reachable

@@ -278,3 +278,6 @@ def scroll_and_click_country(driver ,country,max_scrolls_per_direction=2, max_cy
 
     print(f"❌ Element '' not found.")
     return {"status": "FAILED", "message": f"Element '{country}' not found after scrolling"}
+
+
+

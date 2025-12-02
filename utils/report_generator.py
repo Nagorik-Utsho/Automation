@@ -1,9 +1,8 @@
-import csv
 from datetime import datetime
 import os
 import pandas as pd
-
-
+import random
+import csv
 
 
 #CSV report generator
@@ -106,4 +105,37 @@ def load_countries_and_servers(csv_path):
     return countries, servers
 
 
+import csv
+import random
+
+def pick_servers(csv_file):
+    servers = []
+    countries = set()
+
+    # First pass: collect all servers and country names
+    with open(csv_file, newline="", encoding="utf-8") as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            country = row["Country"].strip()
+            server = row["Server"].strip().replace("\n", " ")
+
+            if server:
+                servers.append(server)
+            if country:
+                countries.add(country.lower())
+
+    # Pick 1 random server
+    selected_server = random.choice(servers)
+
+    # Default: no matched country
+    matched_country = ""
+
+    # Check if selected server contains a country name
+    s_lower = selected_server.lower()
+    for country in countries:
+        if country in s_lower:
+            matched_country = country.title()
+            break
+
+    return selected_server, matched_country
 
