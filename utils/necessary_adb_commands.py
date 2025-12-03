@@ -21,7 +21,7 @@ def reopen_enova(driver):
         driver.execute_script("mobile: shell",
                               {"command": "monkey -p com.enovavpn.mobile -c android.intent.category.LAUNCHER 1"})
         print("Reopened Enova VPN")
-        time.sleep(5)
+        time.sleep(1)
         return {"status": "Passed", "message": "Application successfully reopened"}
     except Exception as e :
         return {"status": "FAILED", "message": f"Failed to reopen app: {e}"}

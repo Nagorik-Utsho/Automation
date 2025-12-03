@@ -31,7 +31,7 @@ def watch_youtube(driver):
         driver.execute_script("mobile: shell",
                               {"command": "monkey -p com.enovavpn.mobile -c android.intent.category.LAUNCHER 1"})
         print("Reopened Enova VPN")
-        time.sleep(5)
+        time.sleep(1)
 
         return {"status": "SUCCESS", "message": "YouTube video watched and VPN reopened successfully"}
 

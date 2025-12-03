@@ -17,9 +17,11 @@ def server_switch_check(driver):
 
     # 1.Server before Server switch
         server, country =pick_servers("collected_countries_servers.csv")
-        print(server, country)
+        print(server , country)
    #  2.Select the server
-        select_server(driver,server,country)
+
+        select_server(driver, server, country)
+
     # 3.Connect with the server
         connect_server(driver)
     # 4.Check IP
@@ -29,7 +31,7 @@ def server_switch_check(driver):
         match_ip(driver, server_name, expected_ip)
     # 5.Watch youtube videos
         watch_youtube(driver)
-    # 6.select server for server switch
+    # 6.select server for server
         server, country = pick_servers("collected_countries_servers.csv")
         print(server, country)
         select_server(driver, server, country)

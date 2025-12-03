@@ -43,7 +43,7 @@ def checking_server_health(driver):
 
 def main():
     driver=setup_driver()
-    collecting_servers_name(driver)
+    #collecting_servers_name(driver)
     checking_server_health(driver)
 
 

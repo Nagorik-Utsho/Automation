@@ -39,7 +39,7 @@ def kill_switch_execution(driver) :
 
 def main():
     driver=setup_driver()
-    time.sleep(5)
+    time.sleep(1)
     kill_switch_execution(driver)
 
 

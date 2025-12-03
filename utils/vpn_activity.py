@@ -203,6 +203,10 @@ def detect_country_for_server(server,country_list) :
 def select_server(driver,server ,country):
     #go to server list
     server_list(driver)
+    server = server.strip()
+    country = country.strip() if country else None
+    print(server)
+    print(country)
 
     if country:
         scroll_and_click_country(driver, country)
