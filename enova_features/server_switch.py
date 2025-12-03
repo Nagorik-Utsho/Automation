@@ -19,7 +19,6 @@ def server_switch_check(driver):
         server, country =pick_servers("collected_countries_servers.csv")
         print(server , country)
    #  2.Select the server
-
         select_server(driver, server, country)
 
     # 3.Connect with the server

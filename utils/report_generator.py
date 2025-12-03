@@ -109,10 +109,9 @@ import csv
 import random
 
 def pick_servers(csv_file):
-    servers = []
+    servers = set()      # <-- FIX: no duplicates
     countries = set()
 
-    # First pass: collect all servers and country names
     with open(csv_file, newline="", encoding="utf-8") as f:
         reader = csv.DictReader(f)
         for row in reader:
@@ -120,18 +119,18 @@ def pick_servers(csv_file):
             server = row["Server"].strip().replace("\n", " ")
 
             if server:
-                servers.append(server)
+                servers.add(server)   # <-- deduplicated
             if country:
                 countries.add(country.lower())
 
-    # Pick 1 random server
+    # Convert to list to pick randomly
+    servers = list(servers)
+
     selected_server = random.choice(servers)
 
-    # Default: no matched country
     matched_country = ""
-
-    # Check if selected server contains a country name
     s_lower = selected_server.lower()
+
     for country in countries:
         if country in s_lower:
             matched_country = country.title()
