@@ -200,11 +200,11 @@ def detect_country_for_server(server,country_list) :
 
 
 #Select any server
-def select_server(driver,server ,country):
+def select_server(driver,server,country):
     #go to server list
     server_list(driver)
-    server = server.strip()
     country = country.strip() if country else None
+    server=server.strip()
     print(server)
     print(country)
 

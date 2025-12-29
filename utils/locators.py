@@ -88,7 +88,7 @@ class CountryDropdown:
 
 
 class LocationPage:
-    scroller_1 = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[5]/android.view.View/android.view.View/android.view.View'
+    scroller_1 = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[3]/android.view.View/android.view.View/android.view.View'
     scroller_2 ='//android.widget.ScrollView'
     all_location= (By.XPATH,'//android.view.View[@content-desc="All Tab 1 of 3"]')
     premium_collection = (By.XPATH,'//android.view.View[@content-desc="Premium\nTab 2 of 3"]')

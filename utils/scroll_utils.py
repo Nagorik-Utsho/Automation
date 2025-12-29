@@ -12,7 +12,7 @@ def scroll_and_collect_countries(driver, max_scrolls_per_direction=2, max_cycles
     print("🔍 Collecting android.view.View elements (with content-desc) from ScrollView...")
 
     possible_scrollviews = [
-       # LocationPage.scroller_1,
+       #LocationPage.scroller_1,
         LocationPage.scroller_2
     ]
 
@@ -154,11 +154,10 @@ def scroll_and_click_server(driver ,server_name,max_scrolls_per_direction=2, max
     Scroll in a ScrollView and click the element if found.
     Returns a dict with status and message.
     """
-    print("Click on the server name")
-    print(f"THe selected : server name : {server_name}")
+
 
     possible_scrollviews = [
-      #LocationPage.scroller_1,
+    #LocationPage.scroller_1,
     LocationPage.scroller_2
     ]
 
@@ -222,8 +221,7 @@ def scroll_and_click_country(driver ,country,max_scrolls_per_direction=2, max_cy
     Scroll in a ScrollView and click the element if found.
     Returns a dict with status and message.
     """
-    print("Click on the country name ")
-    print(f"The country name : {country}")
+
     possible_scrollviews = [
       #LocationPage.scroller_1,
         LocationPage.scroller_2
